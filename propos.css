@@ -1,0 +1,54 @@
+/* ================= À PROPOS ================= */
+#about {
+    background: #f8f9fa;
+}
+
+#about .section-title {
+    font-size: 2.8rem;
+    margin-bottom: 60px;
+}
+
+#about p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+#about .card {
+    border-radius: 25px;
+    transition: 0.4s;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    background: white;
+}
+
+#about .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+}
+
+#about .card h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+#about .card h5 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+#about .card ul {
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+#about .card ul li {
+    margin-bottom: 8px;
+}
+
+#about .btn-primary-custom {
+    font-size: 1rem;
+    padding: 12px 30px;
+}

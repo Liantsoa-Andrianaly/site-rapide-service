@@ -1,0 +1,265 @@
+    :root {
+        --primary: #0062ff;
+        --secondary: #00d2ff;
+        --accent: #ff4500; /* Orange pour l'action */
+        --dark: #0a1742;
+        --light: #f8f9fa;
+        --glass: rgba(255, 255, 255, 0.85);
+    }
+
+    /* ================= GLOBAL ================= */
+    body {
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        color: var(--dark);
+        scroll-behavior: smooth;
+        background: #f4f7fb;
+        overflow-x: hidden;
+    }
+
+    /* ================= NAVBAR MODERNISÉE ================= */
+    .navbar {
+        padding: 12px 0;
+        background: var(--glass) !important;
+        backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(0, 98, 255, 0.1);
+        transition: 0.3s ease;
+    }
+
+    .navbar-brand span {
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800;
+    }
+
+    .nav-link {
+        color: var(--dark) !important;
+        font-weight: 600;
+        margin-left: 15px;
+        transition: 0.3s;
+    }
+
+    .nav-link:hover, .nav-link.active {
+        color: var(--primary) !important;
+    }
+
+    /* ================= HERO IMPACTANT ================= */
+    .hero {
+        height: 85vh;
+        min-height: 500px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: white;
+        background: linear-gradient(135deg, rgba(10, 23, 66, 0.8), rgba(3, 41, 102, 0.6)), url('tsiky.png');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        margin-bottom: 50px;
+    }
+
+    .text-accent {
+        color: #ffcc00; /* Jaune vif pour attirer l'oeil sur le mot important */
+    }
+
+    .hero h1 {
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
+        font-weight: 900;
+        line-height: 1.1;
+    }
+
+    /* ================= BOUTONS CTA ================= */
+    .btn-cta-main {
+        background: var(--accent);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 16px 40px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        box-shadow: 0 10px 25px rgba(255, 69, 0, 0.3);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .btn-cta-main:hover {
+        transform: translateY(-5px) scale(1.05);
+        background: #ff5722;
+        color: white;
+        box-shadow: 0 15px 30px rgba(255, 69, 0, 0.5);
+    }
+
+    .btn-primary-custom {
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        border: none;
+        border-radius: 50px;
+        font-weight: 600;
+    }
+
+    /* ================= TRUST BADGES (CONFIANCE) ================= */
+    .trust-badge {
+        background: white;
+        padding: 40px 25px;
+        border-radius: 30px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        transition: 0.4s ease;
+        height: 100%;
+    }
+
+    .trust-badge:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 98, 255, 0.1);
+    }
+
+    .trust-badge i {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .trust-badge h4 {
+        font-weight: 700;
+        font-size: 1.25rem;
+    }
+
+    /* ================= FOOTER OPTIMISÉ ================= */
+    footer {
+        background: linear-gradient(135deg, #0a1742, #093891);
+        color: white;
+        padding: 80px 0 30px;
+        border-radius: 60px 60px 0 0;
+        margin-top: 80px;
+    }
+
+    .footer-columns {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 50px;
+        margin-bottom: 50px;
+    }
+
+    .footer-columns h6 {
+        color: #ffcc00;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: 25px;
+    }
+
+    .social-icons i {
+        font-size: 1.5rem;
+        margin-right: 20px;
+        color: #fff;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .social-icons i:hover {
+        color: var(--accent);
+        transform: scale(1.3);
+    }
+
+    .copyright {
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding-top: 30px;
+        text-align: center;
+        font-size: 0.9rem;
+        opacity: 0.7;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 992px) {
+        .footer-columns {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+        .hero {
+            height: 70vh;
+        }
+    }
+
+
+    /* ================= LOCALISATION STYLÉE ================= */
+
+#localisation {
+    overflow: hidden;
+}
+
+/* Conteneur de la carte avec effet de profondeur */
+.map-wrapper {
+    position: relative;
+    border-radius: 20px;
+    transition: transform 0.4s ease;
+}
+
+.map-wrapper:hover {
+    transform: perspective(1000px) rotateY(-5deg); /* Effet 3D léger */
+}
+
+.map-wrapper img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    max-height: 500px;
+}
+
+/* Petit badge flottant sur la carte */
+.map-overlay-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    color: var(--primary);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: bounce 2s infinite;
+}
+
+/* Boîtes d'informations */
+.info-box {
+    transition: 0.3s;
+}
+
+.info-box:hover {
+    background: #fff !important;
+    box-shadow: 0 10px 25px rgba(0, 98, 255, 0.1);
+    transform: translateX(10px);
+}
+
+.icon-circle {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+/* Animation de flottement du badge */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Harmonisation du titre */
+.text-primary-custom {
+    color: var(--primary);
+    font-weight: 800;
+}
+
+.hover-link:hover {
+    color: #ffc107 !important; /* Devient jaune au survol */
+    padding-left: 5px;
+    transition: all 0.3s ease;
+}
+
+.grayscale {
+    filter: grayscale(100%) brightness(200%);
+}

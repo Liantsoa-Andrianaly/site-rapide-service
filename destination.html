@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rapide Service - Nos destinations</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="rapide.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="logo.png" alt="Logo" class="me-2" style="height: 50px;">
+            <span class="fw-bold fs-4">Rapide Service</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link " href="rapide.html">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="utilisateur.html">Référence</a></li>
+                <li class="nav-item"><a class="nav-link active" href="destination.html">destinations</a></li>
+                <li class="nav-item ms-lg-3">
+                    <a href="https://wa.me/261321145622" class="btn btn-primary-custom btn-sm px-3 text-white">
+                        <i class="fab fa-whatsapp"></i> Contactez
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<section class="py-5 mt-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+    <div class="container py-4">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="fw-black text-uppercase tracking-tighter mb-3" style="font-size: 3rem;">
+                    Nos <span class="text-primary">Destinations</span>
+                </h1>
+                <p class="lead text-muted mb-4">
+                    Rapide Service couvre l'ensemble du territoire malgache. Découvrez nos zones desservies et nos délais de livraison optimisés par route et par avion.
+                </p>
+                <div class="d-flex gap-3">
+                    <div class="p-3 bg-white shadow-sm rounded-4 text-center flex-fill border-bottom border-primary border-4">
+                        <h4 class="fw-bold mb-0">60+</h4>
+                        <small class="text-uppercase text-muted" style="font-size: 0.6rem;">Villes Desservies</small>
+                    </div>
+                    <div class="p-3 bg-white shadow-sm rounded-4 text-center flex-fill border-bottom border-warning border-4">
+                        <h4 class="fw-bold mb-0">J+1 à J+20</h4>
+                        <small class="text-uppercase text-muted" style="font-size: 0.6rem;">Délais Flexibles</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mt-5 mt-lg-0 text-center">
+                <img src="sary.png" alt="Zone Desservie Madagascar" class="img-fluid rounded-5 shadow-lg partner-card" style="max-height: 500px;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-6 bg-light" id="destinations">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h2 class="fw-black text-uppercase tracking-tighter">Nos <span class="text-primary">Destinations</span> & Délais</h2>
+            <p class="text-muted">Une couverture nationale complète avec des départs quotidiens de notre siège à Ankadifotsy.</p>
+        </div>
+
+        <ul class="nav nav-pills mb-4 justify-content-center gap-2" id="destTab" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active rounded-pill px-4 fw-bold shadow-sm" data-bs-toggle="pill" data-bs-target="#route-tab">
+                    <i class="fa-solid fa-truck me-2"></i>Par terre
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link rounded-pill px-4 fw-bold shadow-sm" data-bs-toggle="pill" data-bs-target="#avion-tab">
+                    <i class="fa-solid fa-plane me-2"></i>Par avion
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content mt-4">
+            <div class="tab-pane fade show active" id="route-tab">
+                <div class="table-responsive glass-card rounded-4 p-4 bg-white shadow-sm">
+                    <table class="table align-middle">
+                        <thead class="text-primary small text-uppercase">
+                            <tr>
+                                <th style="width: 50%;">Zones Desservies</th>
+                                <th>Départ (Lun-Ven)</th>
+                                <th>Départ (Sam)</th>
+                                <th>Livraison Estimée</th>
+                            </tr>
+                        </thead>
+                        <tbody class="small text-dark">
+                            <tr>
+                                <td><b>Axe Central & Est :</b> Ambatolampy, Antsirabe, Ambositra, Fandriana, Fianarantsoa, Ambalavao, Arivonimamo, Miarinarivo, Analavory, Anjozorobe, Maevantana, Ankazobe, Mahajanga, Brickaville, Tamatave, Vatomandry, Moramanga.</td>
+                                <td>17h00</td>
+                                <td>15h00</td>
+                                <td class="text-success fw-bold">J+1</td>
+                            </tr>
+                            <tr>
+                                <td>Mampikony, Marovoay, Ambato Boeny.</td>
+                                <td>13h00</td>
+                                <td>12h00</td>
+                                <td class="text-success fw-bold">J+1</td>
+                            </tr>
+                            <tr>
+                                <td><b>Long Courrier :</b> Toliara, Vangaindrano, Sakaraha, Vohipeno, Diego, Mandritsara, Bealalana, Antsohihy, Port-Berger, Foulpointe, Fenerive-Est, Ambilobe, Ambanja, Farafangana, Ambatondrazaka, Amparafaravola, Ambolibe, Manakara, Tanambe, Mananjary, Ihosy, Morondava, Miandrivazo.</td>
+                                <td>13h / 17h</td>
+                                <td>12h / 15h</td>
+                                <td class="text-primary fw-bold">J+3 à J+4 (Sauf gros colis)</td>
+                            </tr>
+                            <tr>
+                                <td>Betroka, Betioky, Nosy Be, Namakia, Sainte Marie, Maroantsetra.</td>
+                                <td>17h00</td>
+                                <td>15h00</td>
+                                <td class="text-primary fw-bold">J+4 à J+5</td>
+                            </tr>
+                            <tr>
+                                <td>Fort-Dauphin, Amboasary Sud, SAVA (Route Ambilobe-Vohemar), Manja, Maintirano, Tsihombe, Ejeda, Marolambo.</td>
+                                <td>17h00</td>
+                                <td>15h00</td>
+                                <td class="text-warning fw-bold">J+6 à J+15</td>
+                            </tr>
+                            <tr class="table-danger bg-opacity-10">
+                                <td colspan="4" class="p-3">
+                                    <i class="fa-solid fa-triangle-exclamation text-danger me-2"></i>
+                                    <b>Alerte Zones Enclavées :</b> Mananara Nord, Morombe, Ambatomainty, Ampanihy, Antsalova, Bezaha, Ambovombe.
+                                    <span class="fw-bold">J+20</span> si gros colis ou pendant la saison des pluies (Nov à Avril).
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="avion-tab">
+                <div class="table-responsive glass-card rounded-4 p-4 bg-white shadow-sm border-top border-primary border-4">
+                    <table class="table align-middle">
+                        <thead class="text-dark small text-uppercase">
+                            <tr>
+                                <th style="width: 50%;">Destinations Aériennes</th>
+                                <th>Départ (Lun-Sam)</th>
+                                <th>Livraison Estimée</th>
+                            </tr>
+                        </thead>
+                        <tbody class="small text-dark">
+                            <tr>
+                                <td><b>Priorité Provincia :</b> Sambava, Nosy Be, Diego, Maintirano, Sainte-Marie, Fort-Dauphin, Toliara.</td>
+                                <td>17h00</td>
+                                <td class="text-primary fw-bold">J+1</td>
+                            </tr>
+                            <tr>
+                                <td><b>Zone SAVA :</b> Andapa, Antalaha, Vohémar.</td>
+                                <td>17h00</td>
+                                <td class="text-primary fw-bold">J+2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="py-6 bg-white">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="p-4 h-100 text-center glass-card rounded-4 border-0 shadow-sm">
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
+                        <i class="fa-solid fa-bolt-lightning text-primary fs-3"></i>
+                    </div>
+                    <h5 class="fw-bold">Rapidité Garantie</h5>
+                    <p class="small text-muted mb-0">Départs quotidiens à 17h pour une livraison dès le lendemain sur la majorité de nos axes.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 h-100 text-center glass-card rounded-4 border-0 shadow-sm">
+                    <div class="bg-warning bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
+                        <i class="fa-solid fa-shield-halved text-warning fs-3"></i>
+                    </div>
+                    <h5 class="fw-bold">Sécurité Maximale</h5>
+                    <p class="small text-muted mb-0">Une manipulation soignée de vos colis et plis, qu'ils soient acheminés par route ou par avion.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 h-100 text-center glass-card rounded-4 border-0 shadow-sm">
+                    <div class="bg-info bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
+                        <i class="fa-solid fa-map-location-dot text-info fs-3"></i>
+                    </div>
+                    <h5 class="fw-bold">Couverture Totale</h5>
+                    <p class="small text-muted mb-0">Plus de 60 zones desservies à travers tout Madagascar, des provinces aux zones enclavées.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="bg-light py-4">
+    <div class="container">
+        <div class="p-4 bg-white border-start border-warning border-4 rounded-3 shadow-sm">
+            <div class="d-flex align-items-center">
+                <i class="fa-solid fa-circle-info text-warning fs-3 me-3"></i>
+                <div>
+                    <h6 class="fw-bold mb-1 text-uppercase">Informations Légales & Siège</h6>
+                    <p class="small text-muted mb-0">
+                        <b>Raison Sociale :</b> Rapide Service (SARLU) | <b>Siège :</b> Lot IVN 46 Bis Ankadifotsy Befelatanana.<br>
+                        <b>Activités :</b> Transport et livraison express à domicile de colis ou plis.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<footer class="bg-dark text-white pt-5 pb-4 position-relative overflow-hidden" style="background: #020617;">
+    <div class="position-absolute top-0 start-0 translate-middle opacity-25" style="width: 400px; height: 400px; background: radial-gradient(circle, #fbbf24 0%, transparent 70%); filter: blur(60px); pointer-events: none;"></div>
+    <div class="position-absolute bottom-0 end-0 translate-middle-y opacity-10" style="width: 300px; height: 300px; background: radial-gradient(circle, #3b82f6 0%, transparent 70%); filter: blur(50px); pointer-events: none;"></div>
+
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(251, 191, 36, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .social-icon-modern {
+            width: 48px;
+            height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.05);
+            color: white;
+            transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .social-icon-modern:hover {
+            background: #fbbf24;
+            color: #020617;
+            transform: scale(1.1) rotate(8deg);
+            border-color: #fbbf24;
+        }
+        .contact-link {
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .contact-link:hover {
+            color: #fbbf24 !important;
+        }
+    </style>
+
+    <div class="container position-relative">
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6 text-center text-lg-start">
+                <h3 class="fw-bold mb-2 text-uppercase tracking-tighter" style="letter-spacing: -0.5px; font-size: 1.75rem;">
+                    <span class="text-warning">RAPIDE</span><span class="fw-light text-white-50">SERVICE</span>
+                </h3>
+                <p class="text-white-50 small mb-0 lh-lg" style="max-width: 450px;">
+                    L'excellence de la logistique à votre portée. Nous transformons chaque livraison en une expérience de sérénité absolue.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4 align-items-stretch">
+            <div class="col-lg-7">
+                <div class="p-4 glass-card rounded-4">
+                    <h6 class="text-warning mb-4 fw-bold text-uppercase small tracking-widest">Coordonnées</h6>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <div class="bg-warning bg-opacity-10 p-2 rounded-3 me-3">
+                                    <i class="fa-solid fa-location-dot text-warning"></i>
+                                </div>
+                                <span class="small text-white-50">Lot IVN 46 Bis Ankadifotsy<br><b class="text-white">Befelatanana, Antananarivo</b></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 border-start border-white border-opacity-10 ps-md-4">
+                            <div class="mb-3 d-flex align-items-center">
+                                <i class="fa-solid fa-phone text-warning me-3 small"></i>
+                                <div class="d-flex flex-column gap-1">
+                                    <a href="tel:+261321145620" class="contact-link text-white-50 small">+261 32 11 456 20</a>
+                                    <a href="tel:+261343740032" class="contact-link text-white-50 small">+261 34 37 400 32</a>
+                           
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="fa-solid fa-envelope text-warning me-3 small"></i>
+                                <a href="mailto:rapideservice@rapideservice.mg" class="contact-link text-white-50 small">rapideservice@rapideservice.mg</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5 d-flex align-items-center justify-content-lg-end justify-content-center">
+                <div class="text-lg-end text-center">
+                    <h6 class="text-white-50 mb-4 small text-uppercase tracking-widest">Rejoignez-nous</h6>
+                    <div class="d-flex gap-3 justify-content-center justify-content-lg-end">
+                        <a href="#" class="social-icon-modern" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <!-- <a href="#" class="social-icon-modern" title="Instagram"><i class="fab fa-instagram"></i></a> -->
+                        <a href="#" class="social-icon-modern" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5 pt-4 border-top border-white border-opacity-5">
+            <div class="col text-center">
+                <p class="mb-0 text-white-50" style="font-size: 0.75rem; opacity: 0.5; letter-spacing: 1px;">
+                    &copy; 2026 <span class="text-white fw-bold">RAPIDE SERVICE</span>. PROPULSÉ AVEC PASSION.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<script src="rapide.js"></script>
+</body>
+</html>
