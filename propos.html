@@ -1,78 +1,165 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rapide Service - Agence de Transport</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>À Propos - Rapide Service Madagascar</title>
 
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-     
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="rapide.css">
 
-<link rel="stylesheet" href="propos.css">
-<link rel="stylesheet" href="rapide.css">
+    <style>
+        /* Styles spécifiques à la page À Propos */
+        /* .bg-primary-custom { background-color: #1e3a8a; } */
+        
+        body { padding-top: 100px; }
+
+        .navbar.scrolled {
+            background-color: #ffffff !important;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .section-title { font-weight: 700; color: #1e293b; position: relative; padding-bottom: 15px; }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: #1e3a8a;
+        }
+
+        .shadow-custom { border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        
+        /* .btn-primary-custom {
+            background-color: #1e3a8a;
+            color: white;
+            border-radius: 30px;
+            padding: 10px 25px;
+            border: none;
+            transition: 0.3s;
+        } */
+        .btn-primary-custom:hover { background-color: #172554; color: #fbbf24; transform: translateY(-2px); }
+
+        .fade-up { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .fade-up.show { opacity: 1; transform: translateY(0); }
+
+        .counter-section { background: linear-gradient(135deg, #1e3a8a, #0f172a); border-radius: 30px; margin-bottom: -50px; position: relative; z-index: 2; }
+        .counter-box { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+        .counter { font-size: 2.5rem; font-weight: 700; color: #fbbf24; }
+    </style>
 </head>
+
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary-custom fixed-top shadow">
-<div class="container">
-    <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="logo.png" class="me-2">
-        <span class="fw-bold fs-5">Rapide Service</span>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="nav">
-        <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link active" href="index.html">Accueil</a></li>
-            <li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>
-            <!-- <li class="nav-item"><a class="nav-link" href="tarif.html">Tarifs</a></li> -->
-            <li class="nav-item"><a class="nav-link" href="utilisateur.html">Références</a></li>
-                <li class="nav-item"><a class="nav-link" href="destination.html">destinations</a></li>
-            <!-- <li class="nav-item"><a class="nav-link" href="#map">Localisation</a></li> -->
-        </ul>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="logo.png" alt="Logo" class="me-2" style="height: 50px;">
+            <span class="fw-bold fs-4">Rapide Service</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" href="index.html">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="tarif.html">Tarifs</a></li> -->
+                <li class="nav-item"><a class="nav-link" href="utilisateur.html">Références</a></li>
+                <li class="nav-item"><a class="nav-link" href="destination.html">Déstinations</a></li>
+
+                <li class="nav-item ms-lg-3">
+                    <a href="https://wa.me/261321145622" class="btn btn-primary-custom btn-sm px-3 text-white">
+                        <i class="fab fa-whatsapp"></i> Contactez
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
 </nav>
 
 
-
-
-    <!-- ================= SECTION À PROPOS ================= -->
-<section id="about" class="py-5 bg-light">
+<section class="py-5">
     <div class="container">
-        <h2 class="section-title text-center mb-5">À propos de Rapide Service</h2>
-        
-        <div class="row align-items-center">
-            <!-- Texte -->
-            <div class="col-md-6 mb-4">
-                <p><strong>Raison sociale :</strong> RAPIDE SERVICE (SARLU)</p>
-                <p><strong>Activité :</strong> Transport et livraison express à domicile des colis ou plis</p>
-                <p><strong>Stat :</strong> 6 410 2 11 2012 0 10789</p>
-                <p><strong>NIF :</strong> 3 001 019 064 | <strong>CIF :</strong> 0144221 DGI - C | <strong>RCS :</strong> 2012 B00738</p>
-                <p><strong>Adresse :</strong> Lot IVN 46 Bis Ankadifotsy Befelatanana, Antananarivo</p>
-                <p><strong>Tel :</strong> 032 11 456 20 - 032 11 456 22 – 034 37 400 32</p>
-                <p><strong>Mail :</strong> rapideservice@rapideservice.mg</p>
-            </div>
+        <div class="text-center mb-5 fade-up">
+            <h2 class="section-title">À propos de Rapide Service</h2>
+            <p class="text-muted">Votre partenaire de confiance pour le transport à Madagascar depuis 12 ans.</p>
+        </div>
 
-            <!-- Carte info + valeurs -->
-            <div class="col-md-6">
-                <div class="card shadow-custom p-4">
-                    <h4>Nos valeurs</h4>
-                    <p>Sécurité, Ponctualité, Efficacité : nous comprenons les besoins et problèmes rencontrés par la population en termes de services de messagerie.</p>
-                    <p>Avec RAPIDE SERVICE, profitez d’une livraison rapide et sûre, avec des tarifs abordables et des services adaptés à vos besoins.</p>
-                    <h5>Nos services principaux :</h5>
-                    <ul>
-                        <li>Expéditions et livraisons express des messageries</li>
-                        <li>Commissions diverses (récupérations, achats, dossiers officiels…)</li>
-                        <li>Déménagement</li>
-                        <li>Transfert d’argent</li>
-                        <li>Location de véhicule utilitaire</li>
+        <div class="row align-items-center g-5">
+            <div class="col-md-6 fade-up">
+                <div class="p-4 bg-white shadow-custom border-0 h-100">
+                    <h4 class="text-primary mb-4"><i class="fa-solid fa-building me-2"></i>Identité de l'entreprise</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><strong>Raison sociale :</strong> RAPIDE SERVICE (SARLU)</li>
+                        <li class="mb-3"><strong>Activité :</strong> Transport de personnes et livraison express de colis</li>
+                        <li class="mb-3"><strong>Siège Social :</strong> Lot IVN 46 Bis Ankadifotsy, Befelatanana</li>
+                        <li class="mb-3"><strong>Zone d'intervention :</strong> Toute l'île de Madagascar</li>
                     </ul>
-                    <a href="contact.html" class="btn btn-primary-custom mt-3">Contactez-nous</a>
+                </div>
+            </div>
+            
+            <div class="col-md-6 fade-up">
+                <div class="card shadow-custom p-4 border-0 bg-white h-100">
+                    <h4 class="text-primary mb-4"><i class="fa-solid fa-bullseye me-2"></i>Nos Valeurs & Mission</h4>
+                    <p>Chez <strong>Rapide Service</strong>, nous croyons que le transport est le moteur du développement. Notre mission est de désenclaver les régions de Madagascar par un service fiable.</p>
+                    <div class="row g-2 mt-2">
+                        <div class="col-6"><i class="fa-solid fa-check-circle text-success me-2"></i>Sécurité Totale</div>
+                        <div class="col-6"><i class="fa-solid fa-check-circle text-success me-2"></i>Ponctualité</div>
+                        <div class="col-6"><i class="fa-solid fa-check-circle text-success me-2"></i>Efficacité</div>
+                        <div class="col-6"><i class="fa-solid fa-check-circle text-success me-2"></i>Tarifs Justes</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5 fade-up">
+            <div class="col-12 text-center">
+                 <h5 class="mb-4">Nos services incluent également :</h5>
+                 <div class="d-flex flex-wrap justify-content-center gap-3">
+                     <span class="badge bg-light text-dark p-3 shadow-sm border">Déménagement</span>
+                     <span class="badge bg-light text-dark p-3 shadow-sm border">Transfert d'argent</span>
+                     <span class="badge bg-light text-dark p-3 shadow-sm border">Location utilitaire</span>
+                     <span class="badge bg-light text-dark p-3 shadow-sm border">Courses officielles</span>
+                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container">
+    <div class="py-5 text-white counter-section shadow-lg">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-5">Rapide Service en chiffres</h2>
+            <div class="row g-4">
+                <div class="col-md-3 col-6">
+                    <div class="counter-box p-4 rounded-4 h-100">
+                        <h1 class="counter" data-target="1250">0</h1>
+                        <p class="mb-0">Clients satisfaits</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="counter-box p-4 rounded-4 h-100">
+                        <h1 class="counter" data-target="3400">0</h1>
+                        <p class="mb-0">Livraisons effectuées</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="counter-box p-4 rounded-4 h-100">
+                        <h1 class="counter" data-target="12">0</h1>
+                        <p class="mb-0">Années d'expérience</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="counter-box p-4 rounded-4 h-100">
+                        <h1 class="counter" data-target="24">0</h1>
+                        <p class="mb-0">Heures / 7j</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -81,12 +168,6 @@
 
 
 
-
-
-
-
-
-<!-- FOOTER -->
 <footer class="bg-dark text-white pt-5 pb-4 position-relative overflow-hidden" style="background: #020617;">
     <div class="position-absolute top-0 start-0 translate-middle opacity-25" style="width: 400px; height: 400px; background: radial-gradient(circle, #fbbf24 0%, transparent 70%); filter: blur(60px); pointer-events: none;"></div>
     <div class="position-absolute bottom-0 end-0 translate-middle-y opacity-10" style="width: 300px; height: 300px; background: radial-gradient(circle, #3b82f6 0%, transparent 70%); filter: blur(50px); pointer-events: none;"></div>
@@ -198,10 +279,42 @@
 </footer>
 
 
-<!-- JS Bootstrap local -->
+<script>
+    /* Animation au scroll */
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) entry.target.classList.add("show");
+        });
+    });
+    document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
 
-<script src="rapide.js"></script>
+    /* Compteur */
+    const animateCounter = (counter) => {
+        const target = +counter.getAttribute("data-target");
+        let current = 0;
+        const increment = target / 100;
+        const update = () => {
+            current += increment;
+            if(current < target) {
+                counter.innerText = Math.ceil(current).toLocaleString();
+                setTimeout(update, 20);
+            } else {
+                counter.innerText = target.toLocaleString();
+            }
+        };
+        update();
+    };
 
+    const counterObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                animateCounter(entry.target);
+                counterObserver.unobserve(entry.target);
+            }
+        });
+    });
+    document.querySelectorAll(".counter").forEach(c => counterObserver.observe(c));
+</script>
 
 </body>
 </html>
