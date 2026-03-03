@@ -4,18 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Rapide Service - Nos destinations</title>
+    
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-     
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="rapide.css">
+    
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            padding-top: 80px; /* Évite que le contenu passe sous la navbar */
+        }
+
+        /* Layout Carte & Sidebar */
+        .main-container {
+            display: flex;
+            flex: 1;
+            height: 600px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            background: white;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        #sidebar {
+            width: 320px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #f1f5f9;
+        }
+
+        .search-box { padding: 24px; }
+
+        #cityList {
+            overflow-y: auto;
+            flex: 1;
+            padding: 0 12px 12px;
+        }
+
+        .city-item {
+            padding: 12px 16px;
+            margin-bottom: 4px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #475569;
+            font-weight: 500;
+        }
+
+        .city-item:hover {
+            background-color: #eff6ff;
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        #map { flex: 1; height: 100%; z-index: 1; }
+
+        .table-responsive.glass-card {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            background: white;
+        }
+
+        @media (max-width: 991px) {
+            .main-container { flex-direction: column; height: auto; }
+            #sidebar { width: 100%; height: 400px; }
+            #map { height: 400px; }
+        }
+    </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="#">
-            <img src="logo.png" alt="Logo" class="me-2" style="height: 50px;">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img src="service.png" alt="Logo" class="me-2" style="height: 50px;">
             <span class="fw-bold fs-4">Rapide Service</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
@@ -23,10 +98,10 @@
         </button>
         <div class="collapse navbar-collapse" id="nav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link " href="index.html">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
                 <li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="utilisateur.html">Références</a></li>
-                <li class="nav-item"><a class="nav-link active" href="destination.html">Déstinations</a></li>
+                <li class="nav-item"><a class="nav-link active fw-bold text-primary" href="destination.html">Destinations</a></li>
                 <li class="nav-item ms-lg-3">
                     <a href="https://wa.me/261321145622" class="btn btn-primary-custom btn-sm px-3 text-white">
                         <i class="fab fa-whatsapp"></i> Contactez
@@ -38,61 +113,177 @@
 </nav>
 
 
-<section class="py-5 mt-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
-    <div class="container py-4">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <h1 class="fw-black text-uppercase tracking-tighter mb-3" style="font-size: 3rem;">
-                    Nos <span class="text-primary">Destinations</span>
-                </h1>
-                <p class="lead text-muted mb-4">
-                    Rapide Service couvre l'ensemble du territoire malgache. Découvrez nos zones desservies et nos délais de livraison optimisés par route et par avion.
-                </p>
-                <div class="d-flex gap-3">
-                    <div class="p-3 bg-white shadow-sm rounded-4 text-center flex-fill border-bottom border-primary border-4">
-                        <h4 class="fw-bold mb-0">60+</h4>
-                        <small class="text-uppercase text-muted" style="font-size: 0.6rem;">Villes Desservies</small>
-                    </div>
-                    <div class="p-3 bg-white shadow-sm rounded-4 text-center flex-fill border-bottom border-warning border-4">
-                        <h4 class="fw-bold mb-0">J+1 à J+20</h4>
-                        <small class="text-uppercase text-muted" style="font-size: 0.6rem;">Délais Flexibles</small>
+
+<section class="py-5 mt-5 position-relative overflow-hidden" style="background: #f8fafc;">
+    <div class="position-absolute top-0 start-0 w-100 h-100 opacity-25" style="background-image: radial-gradient(#0d6efd 0.5px, transparent 0.5px); background-size: 20px 20px;"></div>
+
+    <div class="container py-lg-5 position-relative">
+        <div class="row align-items-center g-4 g-lg-5">
+            
+            <div class="col-lg-5">
+                <div class="text-center text-lg-start">
+                    <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill mb-3 fw-bold border border-primary border-opacity-25">
+                        <i class="fa-solid fa-earth-africa me-2"></i>Réseau National
+                    </span>
+                    <h1 class="display-4 fw-bold mb-4 tracking-tight" style="color: #0f172a;">
+                        Nos <span class="text-primary">Destinations</span>
+                    </h1>
+                    <p class="lead text-secondary mb-5 lh-lg">
+                        Rapide Service couvre l'ensemble du territoire malgache. Découvrez nos zones desservies et nos délais de livraison optimisés.
+                    </p>
+                    
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="stat-card p-4 bg-white rounded-4 border-0 shadow-sm transition-hover">
+                                <div class="icon-shape bg-primary bg-opacity-10 text-primary rounded-3 mb-3 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                                    <i class="fa-solid fa-city"></i>
+                                </div>
+                                <h3 class="fw-bold mb-0">60+</h3>
+                                <p class="text-muted small fw-medium text-uppercase mb-0">Villes</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stat-card p-4 bg-white rounded-4 border-0 shadow-sm transition-hover">
+                                <div class="icon-shape bg-warning bg-opacity-10 text-warning rounded-3 mb-3 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                                    <i class="fa-solid fa-bolt"></i>
+                                </div>
+                                <h3 class="fw-bold mb-0">J+1</h3>
+                                <p class="text-muted small fw-medium text-uppercase mb-0">Délai Express</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 mt-5 mt-lg-0 text-center">
-                <img src="destination.jpg" alt="Zone Desservie Madagascar" class="img-fluid rounded-5 shadow-lg partner-card" style="max-height: 500px;">
+
+            <div class="col-lg-7">
+                <div class="card border-0 shadow-lg overflow-hidden rounded-4" style="background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px);">
+                    <div class="row g-0">
+                        <div class="col-md-5 col-lg-4 border-end border-light bg-white">
+                            <div class="p-3">
+                                <div class="search-group position-relative mb-3">
+                                    <i class="fa fa-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted small"></i>
+                                    <input type="text" id="searchInput" class="form-control form-control-sm ps-5 bg-light border-0 rounded-3 shadow-none py-2" placeholder="Rechercher une ville...">
+                                </div>
+                                
+                                <div id="cityList" class="custom-scrollbar" style="height: 400px; overflow-y: auto;">
+                                    </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-7 col-lg-8 position-relative">
+                            <div id="map" style="height: 500px; z-index: 1;"></div>
+                            <div class="position-absolute bottom-0 end-0 m-3 z-3 shadow-sm bg-white px-3 py-1 rounded-pill border border-light">
+                                <span class="small fw-bold text-dark"><span id="count" class="text-primary">0</span> Villes connectées</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 </section>
 
-<section class="py-6 bg-light" id="destinations">
+<style>
+    /* Animation au survol des cartes stats */
+.transition-hover {
+    transition: transform 0.3s ease, shadow 0.3s ease;
+}
+.transition-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08) !important;
+}
+
+/* Style des items de la liste */
+.city-item {
+    padding: 10px 15px;
+    margin-bottom: 4px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    color: #475569;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.city-item:hover {
+    background: #f1f5f9;
+    color: #0d6efd;
+    padding-left: 20px;
+}
+
+.city-item.active {
+    background: #eff6ff;
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+/* Scrollbar stylisée */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 10px;
+}
+
+/* Ajustements responsives pour le widget */
+@media (max-width: 767px) {
+    #cityList { height: 200px !important; }
+    #map { height: 350px !important; }
+}
+</style>
+
+<section class="py-5 bg-light" id="destinations">
     <div class="container py-5">
         <div class="text-center mb-5">
-            <h2 class="fw-black text-uppercase tracking-tighter">Nos <span class="text-primary">Destinations</span> & Délais</h2>
-            <p class="text-muted">Une couverture nationale complète avec des départs quotidiens de notre siège à Ankadifotsy.</p>
+            <h2 class="fw-bold text-uppercase h1">Destinations <span class="text-primary">&</span> Délais</h2>
+            <p class="text-muted mx-auto" style="max-width: 600px;">Une couverture nationale complète avec des départs quotidiens de notre siège à Ankadifotsy.</p>
         </div>
 
-        <ul class="nav nav-pills mb-4 justify-content-center gap-2" id="destTab" role="tablist">
-            <li class="nav-item">
-                <button class="nav-link active rounded-pill px-4 fw-bold shadow-sm" data-bs-toggle="pill" data-bs-target="#route-tab">
-                    <i class="fa-solid fa-truck me-2"></i>Par terre
-                </button>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link rounded-pill px-4 fw-bold shadow-sm" data-bs-toggle="pill" data-bs-target="#avion-tab">
-                    <i class="fa-solid fa-plane me-2"></i>Par avion
-                </button>
-            </li>
-        </ul>
+<div class="d-flex justify-content-center mb-5">
+    <div class="nav nav-pills p-1 bg-white border rounded-pill shadow-sm" id="destTab" role="tablist">
+        
+        <div class="nav-item" role="presentation">
+            <button class="nav-link active rounded-pill px-4 py-2 fw-semibold d-flex align-items-center justify-content-center border-0" 
+                    id="pills-route-tab" 
+                    data-bs-toggle="pill" 
+                    data-bs-target="#route-tab" 
+                    type="button" 
+                    role="tab"
+                    style="--bs-nav-pills-link-active-bg: #e9ecef; --bs-nav-pills-link-active-color: #b2dba5;">
+                <i class="fa-solid fa-truck-fast me-2 small"></i>
+                <span class="small">Par terre</span>
+            </button>
+        </div>
+        
+        <div class="nav-item" role="presentation">
+            <button class="nav-link rounded-pill px-4 py-2 fw-semibold d-flex align-items-center justify-content-center border-0 text-muted" 
+                    id="pills-avion-tab" 
+                    data-bs-toggle="pill" 
+                    data-bs-target="#avion-tab" 
+                    type="button" 
+                    role="tab"
+                                        style="--bs-nav-pills-link-active-bg: #e9ecef; --bs-nav-pills-link-active-color: #b2dba5;">
+                <i class="fa-solid fa-plane-up me-2 small"></i>
+                <span class="small">Par avion</span>
+            </button>
+        </div>
 
-        <div class="tab-content mt-4">
+    </div>
+</div>
+       <div class="tab-content mt-4">
             <div class="tab-pane fade show active" id="route-tab">
                 <div class="table-responsive glass-card rounded-4 p-4 bg-white shadow-sm">
                     <table class="table align-middle">
                         <thead class="text-primary small text-uppercase">
                             <tr>
-                                <th style="width: 50%;">Zones Desservies</th>
+                                <th style="width: 50%;">Destinations Terrestre</th>
                                 <th>Départ (Lun-Ven)</th>
                                 <th>Départ (Sam)</th>
                                 <th>Livraison Estimée</th>
@@ -168,62 +359,9 @@
             </div>
         </div>
     </div>
-</section>
 
-
-<section class="py-6 bg-white">
-    <div class="container">
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="p-4 h-100 text-center glass-card rounded-4 border-0 shadow-sm">
-                    <div class="bg-primary bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
-                        <i class="fa-solid fa-bolt-lightning text-primary fs-3"></i>
-                    </div>
-                    <h5 class="fw-bold">Rapidité Garantie</h5>
-                    <p class="small text-muted mb-0">Départs quotidiens à 17h pour une livraison dès le lendemain sur la majorité de nos axes.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="p-4 h-100 text-center glass-card rounded-4 border-0 shadow-sm">
-                    <div class="bg-warning bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
-                        <i class="fa-solid fa-shield-halved text-warning fs-3"></i>
-                    </div>
-                    <h5 class="fw-bold">Sécurité Maximale</h5>
-                    <p class="small text-muted mb-0">Une manipulation soignée de vos colis et plis, qu'ils soient acheminés par route ou par avion.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="p-4 h-100 text-center glass-card rounded-4 border-0 shadow-sm">
-                    <div class="bg-info bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
-                        <i class="fa-solid fa-map-location-dot text-info fs-3"></i>
-                    </div>
-                    <h5 class="fw-bold">Couverture Totale</h5>
-                    <p class="small text-muted mb-0">Plus de 60 zones desservies à travers tout Madagascar, des provinces aux zones enclavées.</p>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
-
-
-<section class="bg-light py-4">
-    <div class="container">
-        <div class="p-4 bg-white border-start border-warning border-4 rounded-3 shadow-sm">
-            <div class="d-flex align-items-center">
-                <i class="fa-solid fa-circle-info text-warning fs-3 me-3"></i>
-                <div>
-                    <h6 class="fw-bold mb-1 text-uppercase">Informations Légales & Siège</h6>
-                    <p class="small text-muted mb-0">
-                        <b>Raison Sociale :</b> Rapide Service (SARLU) | <b>Siège :</b> Lot IVN 46 Bis Ankadifotsy Befelatanana.<br>
-                        <b>Activités :</b> Transport et livraison express à domicile de colis ou plis.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
 
 
 <footer class="bg-dark text-white pt-5 pb-4 position-relative overflow-hidden" style="background: #020617;">
@@ -318,9 +456,9 @@
                 <div class="text-lg-end text-center">
                     <h6 class="text-white-50 mb-4 small text-uppercase tracking-widest">Rejoignez-nous</h6>
                     <div class="d-flex gap-3 justify-content-center justify-content-lg-end">
-                        <a href="#" class="social-icon-modern" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.bing.com/ck/a?!&&p=97141dd41687f81e2a1c77994710170ba2a159536c22c0423fe369dd1c92c82dJmltdHM9MTc3MjQwOTYwMA&ptn=3&ver=2&hsh=4&fclid=35050ecf-7af8-63ae-06bd-19c27b696292&psq=rapide+service&u=a1aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3JhcGlkZXNlcnZpY2UubWcv" class="social-icon-modern" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <!-- <a href="#" class="social-icon-modern" title="Instagram"><i class="fab fa-instagram"></i></a> -->
-                        <a href="#" class="social-icon-modern" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/261321145622" class="social-icon-modern" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
             </div>
@@ -337,7 +475,140 @@
 </footer>
 
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-<script src="rapide.js"></script>
+<script>
+    // Votre script original reste fonctionnel ici
+    const villes = [
+        { nom: "Diego",numero: "+261 32 11 456 27 ", latitude: -12.32419, longitude: 49.30460 },
+        { nom: "Anivorano", numero: " ", latitude: -12.74442, longitude: 49.23497 },
+        { nom: "Ambilobe",numero: "+261 32 11 456 49 ", latitude: -13.19444, longitude: 49.04930 },
+
+        { nom: "Vohemar",numero: "+261 32 11 456 57", latitude: -13.37073, longitude: 50.00265 },
+        { nom: "Ambanja",numero: "+261 32 11 456 79 ", latitude: -13.66386, longitude: 48.45301 },
+        { nom: "Nosy be",numero: "+261 32 11 456 30 ", latitude: -13.31500, longitude: 48.25005 },
+
+        { nom: "Andapa",numero: "+261 32 11 456 36 ", latitude: -14.65897, longitude: 49.64438 },
+        { nom: "Sambava",numero: "+261 32 11 456 45 ", latitude: -14.27139, longitude: 50.16702 },
+        { nom: "Befandriana nord",numero: "+261 32 03 456 97 ", latitude: -15.25454, longitude: 48.53399 },
+
+        { nom: "Antsohihy",numero: "+261 32 11 456 03 ", latitude: -14.88565, longitude: 47.99450 },
+        { nom: "Toamasina",numero: "+261 32 11 456 28 ", latitude: -18.1492, longitude: 49.4023 },
+        { nom: "Bealanana",numero: "+261 32 03 819 47", latitude: -14.54470, longitude: 48.74883 },
+
+        { nom: "Antalaha",numero: "+261 32 11 456 14 ", latitude: -14.90590, longitude: 50.27612 },
+        { nom: "Maroantsetra",numero: "+261 32 11 456 15 ", latitude: -15.43483, longitude: 49.72840 },
+        { nom: "Mandritsara",numero: "+261 32 11 456 73 ", latitude: -15.85968, longitude: 48.82976 },
+
+        { nom: "Port-berge",numero: "+261 32 11 456 96 ", latitude: -15.56292, longitude: 47.67060 },
+        { nom: "Majunga",numero: "+261 32 11 456 24 ", latitude: -15.71832, longitude: 46.31733 },
+        { nom: "Marovoay",numero: "+261 32 07 456 41 ", latitude: -16.10711, longitude: 46.64715 },
+
+        { nom: "Mampikony",numero: "+261 32 11 456 50 ", latitude: -16.09188, longitude: 47.64826 },
+        { nom: "Mananara nord",numero: "+261 32 03 456 39 ", latitude: -16.17049, longitude: 49.76519 },
+        { nom: "Sainte Marie",numero: "+261 32 11 456 55 ", latitude: -16.89242, longitude: 49.88619  },
+
+        { nom: "Soanierana ivongo",numero: "+261 32 06 866 37 ", latitude: -16.92114, longitude: 49.58487 },
+        { nom: "Vavatenina",numero: "+261 32 03 456 99 ", latitude: -17.46538, longitude: 49.20043 },
+        { nom: "Maevatanana",numero: "+261 32 11 456 67 ", latitude: -16.94852, longitude: 46.83186},
+
+        { nom: "Ambondromamy",numero: "+261 32 82 488 11 ", latitude: -16.37899, longitude: 47.22122 },
+        { nom: "Namakia",numero: "+261 32 29 762 26 ", latitude: -15.91408, longitude: 45.84020 },
+        { nom: "Fenerive Est" ,numero: "+261 32 11 476 75 ", latitude: -17.38141, longitude: 49.40880},
+
+        { nom: "Amparafaravola",numero: "+261 32 07 456 45 ", latitude: -17.58721, longitude: 48.22172 },
+        { nom: "Maintirano",numero: "+261 32 11 456 83 ", latitude: -18.05260, longitude: 44.03556 },
+        { nom: "Ambatondrazaka",numero: "+261 32 11 456 39 ", latitude: -17.83004, longitude: 48.43026 },
+
+        { nom: "Antananarivo",numero: "+261 32 11 456 22 ", latitude: -18.92122, longitude: 47.49729},
+        { nom: "Tsiroanomandidy" ,numero: "+261 32 07 456 43 ", latitude: -18.77096, longitude: 46.04610 },
+        { nom: "Moramanga",numero: "+261 32 11 456 07 ", latitude: -18.94912, longitude: 48.22472 }
+,
+        { nom: "Toamasina",numero: "+261 32 11 456 28 ", latitude: -18.17231, longitude: 49.37771 },
+        { nom: "Arivonimamo",numero: "+261 32 61 026 53 ", latitude: -19.00790, longitude: 47.18344 },
+        { nom: "Miarinarivo",numero: "+261 32 03 819 46  ", latitude: -18.94797, longitude: 46.91080 },
+
+        { nom: "Miandrivazo" ,numero: "+261 37 69 821 33 ", latitude: -19.53552, longitude: 45.46078 },
+        { nom: "Antsirabe",numero: "+261 32 11 456 32 ", latitude: -19.87385, longitude: 47.02714 },
+        { nom: "Ambatolampy",numero: "+261 32 07 456 44 ", latitude: -19.38330, longitude: 47.43816 },
+
+        { nom: "Mahanoro",numero: "+261 32 14 489 54 ", latitude: -19.89452, longitude: 48.80642 },
+        { nom: "Ambatofinandrahana",numero: "+261 32 66 754 69 ", latitude: -20.55028, longitude: 46.79184 },
+        { nom: "Morondava",numero: "+261 32 11 456 35 ", latitude: -20.29794, longitude: 44.28215 },
+
+        { nom: "Mananjary" ,numero: "+261 32 11 456 56 ", latitude: -21.22513, longitude: 48.34711 },
+        { nom: "Ambositra",numero: "+261 32 07 456 40 ", latitude: -20.53666, longitude: 47.24724 },
+        { nom: "Fianarantsoa",numero: "+261 32 11 456 17 ", latitude: -21.45455, longitude: 47.08423 },
+
+        { nom: "Manja",numero: "+261 32 83 025 74 ", latitude: -21.43198, longitude: 44.32093 },
+        { nom: "Vohipeno",numero: " ", latitude: -22.35408, longitude:47.83997 },
+        { nom: "Manakara",numero: "+261 32 11 456 43 ", latitude: -22.14512, longitude: 48.00968},
+
+        { nom: "Farafangana",numero: "+261 32 03 457 32 ", latitude: -22.82210, longitude: 47.83402 },
+        { nom: "Ambalavao",numero: "+261 32 03 456 23 ", latitude: -21.83194, longitude: 46.93649 },
+        { nom: "Ranohira",numero: " ", latitude: -22.55572, longitude: 45.41899 },
+
+        { nom: "Morombe",numero: "+261 32 72 703 84 ", latitude: -21.75073, longitude: 43.36637 },
+        { nom: "Sakaraha",numero: "+261 32 84 276 59 ", latitude: -22.91054, longitude: 44.52586 },
+        { nom: "Ihosy",numero: "+261 32 11 456 37 ", latitude: -22.40099, longitude: 46.12721 },
+
+
+        { nom: "Toliara",numero: "+261 32 11 456 29 ", latitude: -23.35879, longitude: 43.66827 },
+        { nom: "Betioky",numero: "+261 34 53 949 19 ", latitude: -23.72225, longitude: 44.38251 },
+        { nom: "Midongy",numero: "+261 34 93 303 85 ", latitude: -23.58067, longitude: 47.19231}
+,
+        { nom: "Vangaindrano",numero: "+261 32 39 368 78 ", latitude: -23.35030, longitude: 47.59108 },
+        { nom: "Befotaka",numero: " ", latitude: -23.82378, longitude: 46.97947 },
+        { nom: "Fort dauphin",numero: "+261 32 11 456 01 ", latitude: -25.02874, longitude: 46.97634 }
+,
+        { nom: "Ampanihy",numero: "+261 34 26 109 59 ", latitude: -24.20529, longitude: 45.86794 },
+        { nom: "Beloha",numero: "", latitude: -25.16960, longitude: 45.06059 },
+        { nom: "Amboasary sud",numero: "+261 32 11 476 90 ", latitude: -25.03884, longitude: 46.38717 },
+
+        { nom: "Ambovombe",numero: "+261 32 03 557 02 ", latitude: -25.17901, longitude: 46.08560 },
+       
+    ];
+
+    const map = L.map('map', { zoomControl: false }).setView([-18.7669, 46.8691], 6);
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '©OpenStreetMap ©CartoDB'
+    }).addTo(map);
+
+    let marker;
+
+    function afficherVille(ville) {
+        map.flyTo([ville.latitude, ville.longitude], 12, { duration: 1.5 });
+        if (marker) map.removeLayer(marker);
+        marker = L.marker([ville.latitude, ville.longitude]).addTo(map)
+            .bindPopup(`<div class='text-center fw-bold'><i class="fa-solid fa-location-dot  text-primary opacity-75"></i>${ville.nom}  | 
+                <i class="fa-solid fa-phone  text-primary opacity-75"></i> ${ville.numero}</div>`).openPopup();
+        if (window.innerWidth < 768) {
+            document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    const cityListContainer = document.getElementById("cityList");
+    const countBadge = document.getElementById("count");
+
+    function renderList(filter = "") {
+        cityListContainer.innerHTML = "";
+        const filteredVilles = villes.filter(v => v.nom.toLowerCase().includes(filter.toLowerCase()));
+        countBadge.textContent = filteredVilles.length;
+        filteredVilles.forEach(ville => {
+            const a = document.createElement("a");
+            a.className = "city-item";
+            a.innerHTML = `<i class="fa-solid fa-location-dot me-3 opacity-50"></i> ${ville.nom}`;
+            a.href = "#";
+            a.onclick = (e) => { e.preventDefault(); afficherVille(ville); };
+            cityListContainer.appendChild(a);
+        });
+    }
+
+    document.getElementById("searchInput").addEventListener("input", (e) => renderList(e.target.value));
+    renderList();
+</script>
 </body>
 </html>
